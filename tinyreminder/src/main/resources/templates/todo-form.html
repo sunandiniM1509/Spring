@@ -1,0 +1,48 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Save Todo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+<form action="#" th:action="@{/todos/save}"
+      th:object="${todo}" method="POST">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <!--<input type="text" th:field="*{name}" placeholder="name"
+           class="form-control mb-4 col-4">-->
+    <br>
+    Name:
+    <span th:classappend="${#fields.hasErrors('name')} ? 'input-icon right' : ''">
+        <i th:if="${#fields.hasErrors('name')}" class="fa fa-exclamation tooltips" data-original-title="please enter a valid name" data-container="body"></i>
+        <input type="text" class="form-control mb-4 col-4" maxlength="10" th:field="*{name}" th:required="required" placeholder="Enter a name between 1 and 10 characters"/>
+        <span style="color:red" th:if="${#fields.hasErrors('name')}" class="help-block" th:errors="*{name}"></span>
+    </span>
+    <br>
+    Description:
+    <span th:classappend="${#fields.hasErrors('description')} ? 'input-icon right' : ''">
+        <i th:if="${#fields.hasErrors('description')}" class="fa fa-exclamation tooltips" data-original-title="please enter the description" data-container="body"></i>
+        <input type="text" class="form-control mb-4 col-4" minlength="10" th:field="*{description}" th:required="required" placeholder="Enter at least 10 characters"/>
+        <span style="color:red" th:if="${#fields.hasErrors('description')}" class="help-block" th:errors="*{description}"></span>
+    </span>
+    <br>
+
+    Description(*):
+    <span th:classappend="${#fields.hasErrors('duration')} ? 'input-icon right' : ''">
+        <i th:if="${#fields.hasErrors('duration')}" class="fa fa-exclamation tooltips" data-original-title="please enter the duration" data-container="body"></i>
+        <input type="text" class="form-control mb-4 col-4" minlength="4" th:field="*{duration}" th:required="required" placeholder="This field is required"/>
+        <span style="color:red" th:if="${#fields.hasErrors('duration')}" class="help-block" th:errors="*{duration}"></span>
+    </span>
+    <br>
+
+    <button type="submit" class="btn btn-info col-1">Save</button>
+</form>
+<hr>
+<a th:href="@{/todos/list}">Back To Dashboard</a>
+</body>

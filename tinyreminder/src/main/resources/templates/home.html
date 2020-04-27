@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <title>KDB</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<h2>KnowlegeDB</h2>
+<hr>
+
+<p>
+    Welcome to Knowlege Database Home Page
+</p>
+
+
+
+<div>
+    <!--User:--> <span sec:authentication="name"></span>
+    <!--Role(s):--> <span sec:authentication="principal.authorities"></span>
+
+
+    <!-- Check for login error -->
+    <div th:if="${session.user}" >
+        <p th:text="'First name: ' + ${session.user.firstName} + ', Last name: ' + ${session.user.lastName} + ', Email: ' + ${session.user.email}"></p>
+    </div>
+</div>
+
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+
+    <p>
+        <a th:href="@{/admin}">View as an Admin</a>
+    </p>
+
+</div>
+
+<div sec:authorize="hasRole('ROLE_USER')">
+
+    <p>
+        <a th:href="@{/welcome}">View as a User</a>
+    </p>
+
+</div>
+
+<hr>
+
+
+<!-- Add a logout button -->
+<form th:action="@{/logout}"
+      method="POST">
+
+    <input type="submit" value="Logout" />
+
+</form>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+

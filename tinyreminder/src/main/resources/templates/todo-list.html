@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Todo Dashboad</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h3>Todo Dashboard</h3>
+    <hr>
+    <a th:href="@{/todos/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+        Create new Todo</a>
+    <a href="/welcome" class="btn btn-primary btn-sm mb-3">Take me back</a>
+    <a href="/home" class="btn btn-primary btn-sm mb-3">Take me home</a>
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Duration</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each = "tempTodo : ${todos}">
+            <td th:text="${tempTodo.Name}" />
+            <td th:text="${tempTodo.Description}" />
+            <td th:text="${tempTodo.Duration}" />
+            <td>
+                <a th:href="@{/todos/showFormForUpdate(todoId=${tempTodo.id})}"
+                   class="btn btn-info btn-sm">
+                    Update
+                </a>
+                <a th:href="@{/todos/delete(todoId=${tempTodo.id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if((!confirm('Did you really complete the task?'))) return false">
+                    Done
+                </a>
+
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>
