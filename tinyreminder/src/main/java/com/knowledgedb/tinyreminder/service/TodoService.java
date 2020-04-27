@@ -7,7 +7,6 @@ import java.util.Optional;
 
 public interface TodoService {
 
-    //I am unable to customize the names
 
     public List<Todo> findAll();//done (displayAll)
 
